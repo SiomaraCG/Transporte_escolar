@@ -5,6 +5,7 @@ import '../models/app_user.dart';
 import '../models/student.dart';
 import '../models/route.dart';
 import '../models/payment.dart';
+import '../models/partner.dart';
 
 class MockDatabase extends ChangeNotifier {
   // Current logged in user
@@ -16,6 +17,12 @@ class MockDatabase extends ChangeNotifier {
     AppUser(id: 'admin_1', name: 'Lic. Sofía Andrade', email: 'admin@transporte.com', role: UserRole.admin),
     AppUser(id: 'driver_1', name: 'Carlos Mendoza (Conductor 1)', email: 'conductor@transporte.com', role: UserRole.driver),
     AppUser(id: 'parent_1', name: 'Mariana Reyes', email: 'padre@transporte.com', role: UserRole.parent),
+  ];
+
+  // Mock Partners (Socios/Conductores)
+  final List<Partner> _partners = [
+    Partner(id: 'partner_1', name: 'Carlos Mendoza', phone: '0987654321', vehiclePlate: 'PAB-1234', licenseNumber: '0987654321'),
+    Partner(id: 'partner_2', name: 'Jorge Ortega', phone: '0998877665', vehiclePlate: 'PCF-5678', licenseNumber: '0998877665'),
   ];
 
   // Mock Students
@@ -151,6 +158,7 @@ class MockDatabase extends ChangeNotifier {
   int _currentPathIndex = 0;
 
   List<AppUser> get users => _users;
+  List<Partner> get partners => _partners;
   List<Student> get students => _students;
   List<SchoolRoute> get routes => _routes;
   List<Payment> get payments => _payments;
@@ -255,6 +263,25 @@ class MockDatabase extends ChangeNotifier {
         _students[i] = _students[i].copyWith(routeId: null);
       }
     }
+    notifyListeners();
+  }
+
+  // --- Partner Methods ---
+  void addPartner(Partner partner) {
+    _partners.add(partner);
+    notifyListeners();
+  }
+
+  void updatePartner(Partner partner) {
+    final index = _partners.indexWhere((p) => p.id == partner.id);
+    if (index != -1) {
+      _partners[index] = partner;
+      notifyListeners();
+    }
+  }
+
+  void deletePartner(String partnerId) {
+    _partners.removeWhere((p) => p.id == partnerId);
     notifyListeners();
   }
 

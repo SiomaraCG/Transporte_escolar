@@ -224,34 +224,40 @@ class _ActiveRouteMapState extends State<ActiveRouteMap> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.share_location_rounded,
-                              color: _shareGps ? AppColors.success : Colors.grey,
-                              size: 22,
-                            ),
-                            const SizedBox(width: 8),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Compartir Ubicación GPS',
-                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.share_location_rounded,
+                                color: _shareGps ? AppColors.success : Colors.grey,
+                                size: 22,
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      'Compartir Ubicación GPS',
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      _shareGps
+                                          ? 'Transmitiendo coordenadas en vivo...'
+                                          : 'Transmisión GPS pausada.',
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        color: _shareGps ? AppColors.success : Colors.grey,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  _shareGps
-                                      ? 'Transmitiendo coordenadas en vivo...'
-                                      : 'Transmisión GPS pausada.',
-                                  style: TextStyle(
-                                    fontSize: 10,
-                                    color: _shareGps ? AppColors.success : Colors.grey,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                              ),
+                            ],
+                          ),
                         ),
                         Switch(
                           value: _shareGps,
@@ -268,30 +274,36 @@ class _ActiveRouteMapState extends State<ActiveRouteMap> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.explore_outlined,
-                              color: _showOptimizedRoute ? AppColors.accent : Colors.grey,
-                              size: 22,
-                            ),
-                            const SizedBox(width: 8),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Consultar Mejor Ruta (OR-Tools)',
-                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.explore_outlined,
+                                color: _showOptimizedRoute ? AppColors.accent : Colors.grey,
+                                size: 22,
+                              ),
+                              const SizedBox(width: 8),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      'Consultar Mejor Ruta (OR-Tools)',
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      _showOptimizedRoute
+                                          ? 'Visualizando recorrido más corto'
+                                          : 'Visualizando trazado estándar',
+                                      style: const TextStyle(fontSize: 10, color: AppColors.textMuted),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  _showOptimizedRoute
-                                      ? 'Visualizando recorrido más corto'
-                                      : 'Visualizando trazado estándar',
-                                  style: const TextStyle(fontSize: 10, color: AppColors.textMuted),
-                                ),
-                              ],
-                            ),
-                          ],
+                              ),
+                            ],
+                          ),
                         ),
                         TextButton.icon(
                           onPressed: () {
